@@ -40,6 +40,7 @@ export interface SplitButtonProps {
   buttonClass?: string;
   defaultLabel?: string;
   disabled?: boolean;
+  id?: string;
   onChange?: (newValue: string) => any;
   onClick?: (value: string) => any;
   options?: string[];
@@ -64,7 +65,7 @@ export class SplitButton extends React.Component<SplitButtonProps, SplitButtonSt
   }
 
   public render(): JSX.Element {
-    const { buttonClass = '', defaultLabel = '', disabled = false, options = [] } = this.props;
+    const { buttonClass = '', defaultLabel = '', disabled = false, id = '', options = [] } = this.props;
     const { expanded, selected } = this.state;
     const { caretRef, hidePanel, onClickOption, onClickDefault, onClickCaret, onKeyDown, setCaretRef } = this;
     const expandedClass = expanded ? ` ${styles.expanded}` : '';
@@ -72,7 +73,12 @@ export class SplitButton extends React.Component<SplitButtonProps, SplitButtonSt
     return (
       <>
         <div className={styles.container}>
-          <button className={`${styles.defaultButton} ${buttonClass}`} disabled={disabled} onClick={onClickDefault}>
+          <button
+            id={id}
+            className={`${styles.defaultButton} ${buttonClass}`}
+            disabled={disabled}
+            onClick={onClickDefault}
+          >
             <span>{defaultLabel}</span>
           </button>
           <div className={styles.separator} />
